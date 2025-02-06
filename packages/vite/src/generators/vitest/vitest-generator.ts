@@ -67,6 +67,7 @@ export async function vitestGeneratorInternal(
 
   tasks.push(await jsInitGenerator(tree, { ...schema, skipFormat: true }));
   const initTask = await initGenerator(tree, {
+    projectRoot: root,
     skipFormat: true,
     addPlugin: schema.addPlugin,
   });
