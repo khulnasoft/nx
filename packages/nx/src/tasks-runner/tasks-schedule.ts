@@ -3,13 +3,14 @@ import {
   getExecutorForTask,
   getExecutorNameForTask,
   removeTasksFromTaskGraph,
+  removeTasksAndDependencies,
 } from './utils';
 import { DefaultTasksRunnerOptions } from './default-tasks-runner';
 import { Task, TaskGraph } from '../config/task-graph';
 import { ProjectGraph } from '../config/project-graph';
 import { findAllProjectNodeDependencies } from '../utils/project-graph-utils';
 import { reverse } from '../project-graph/operators';
-import { TaskHistory, getTaskHistory } from '../utils/task-history';
+import { getTaskHistory, TaskHistory } from '../utils/task-history';
 import { RunningTasksService } from '../native';
 
 export interface Batch {
@@ -33,7 +34,7 @@ export class TasksSchedule {
 
   constructor(
     private readonly projectGraph: ProjectGraph,
-    private readonly taskGraph: TaskGraph,
+    private taskGraph: TaskGraph,
     private readonly runningTasksService: RunningTasksService,
     private readonly options: DefaultTasksRunnerOptions
   ) {}
@@ -45,6 +46,18 @@ export class TasksSchedule {
           Object.values(this.taskGraph.tasks).map((t) => t.target)
         );
     }
+
+    this.taskGraph = removeTasksAndDependencies(
+      this.taskGraph,
+      this.reverseTaskDeps,
+      new Set(
+        this.runningTasksService.getRunningTasks(
+          Object.entries(this.taskGraph.tasks)
+            .filter(([id, task]) => task.continuous)
+            .map(([id]) => id)
+        )
+      )
+    );
 
     for (const project of Object.values(this.taskGraph.tasks).map(
       (t) => t.target.project
@@ -119,10 +132,6 @@ export class TasksSchedule {
       this.notScheduledTaskGraph,
       [taskId]
     );
-    // Tasks is running somewhere else, don't actually schedule it.
-    if (this.runningTasksService.isTaskRunning(taskId)) {
-      return;
-    }
     this.scheduledTasks = this.scheduledTasks
       .concat(taskId)
       // NOTE: sort task by most dependent on first
@@ -261,10 +270,8 @@ export class TasksSchedule {
       (id) => this.completedTasks.has(id)
     );
     const hasContinuousDependenciesStarted =
-      this.taskGraph.continuousDependencies[taskId].every(
-        (id) =>
-          this.runningTasks.has(id) ||
-          this.runningTasksService.isTaskRunning(id)
+      this.taskGraph.continuousDependencies[taskId].every((id) =>
+        this.runningTasks.has(id)
       );
 
     // if dependencies have not completed, cannot schedule

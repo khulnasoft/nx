@@ -1,4 +1,3 @@
-import { output } from '../utils/output';
 import { relative } from 'path';
 import { join } from 'path/posix';
 import { Task, TaskGraph } from '../config/task-graph';
@@ -499,6 +498,133 @@ function removeIdsFromTaskGraph<T>(
     ),
   };
 }
+
+export function removeTasksAndDependencies(
+  taskGraph: TaskGraph,
+  reverseTaskDeps: TaskGraph['dependencies'],
+  tasksToRemove: Set<string>
+): TaskGraph {
+  let combinedSubgraph: TaskGraph = {
+    tasks: {},
+    dependencies: {},
+    continuousDependencies: {},
+    roots: [],
+  };
+  for (const taskId of tasksToRemove) {
+    const subgraph = getSubgraph(taskGraph, taskId);
+    for (const taskId in subgraph.tasks) {
+      combinedSubgraph.tasks[taskId] ??= subgraph.tasks[taskId];
+      combinedSubgraph.dependencies[taskId] ??= subgraph.dependencies[taskId];
+      combinedSubgraph.continuousDependencies[taskId] ??=
+        subgraph.continuousDependencies[taskId];
+      combinedSubgraph.roots = Array.from(
+        new Set([...combinedSubgraph.roots, ...subgraph.roots])
+      );
+    }
+  }
+
+  const neededTasks: string[] = [];
+
+  const seen: string[] = [];
+  const subgraphTasksCount = Object.keys(combinedSubgraph.tasks).length;
+
+  while (seen.length < subgraphTasksCount) {
+    for (const taskId of combinedSubgraph.roots) {
+      seen.push(taskId);
+      const shouldRemove =
+        !tasksToRemove.has(taskId) &&
+        reverseTaskDeps[taskId].some(
+          (d) => !combinedSubgraph.tasks[d] || neededTasks.includes(d)
+        );
+      if (shouldRemove) {
+        neededTasks.push(taskId);
+        combinedSubgraph = removeTasksFromTaskGraph(combinedSubgraph, [taskId]);
+      }
+    }
+  }
+
+  taskGraph = removeTasksFromTaskGraph(
+    taskGraph,
+    Object.keys(combinedSubgraph.tasks)
+  );
+  return taskGraph;
+}
+
+function getSubgraph(taskGraph: TaskGraph, taskId: string): TaskGraph {
+  const subgraph: TaskGraph = {
+    tasks: {},
+    dependencies: {},
+    continuousDependencies: {},
+    roots: [],
+  };
+
+  function collectDependencies(taskId: string) {
+    if (!taskGraph.tasks[taskId]) return;
+
+    subgraph.tasks[taskId] = taskGraph.tasks[taskId];
+    subgraph.dependencies[taskId] = taskGraph.dependencies[taskId] || [];
+    subgraph.continuousDependencies[taskId] =
+      taskGraph.continuousDependencies[taskId] || [];
+
+    for (const dep of subgraph.dependencies[taskId]) {
+      if (!subgraph.tasks[dep]) {
+        collectDependencies(dep);
+      }
+    }
+
+    for (const dep of subgraph.continuousDependencies[taskId]) {
+      if (!subgraph.tasks[dep]) {
+        collectDependencies(dep);
+      }
+    }
+  }
+
+  collectDependencies(taskId);
+
+  subgraph.roots = Object.keys(subgraph.tasks).filter(
+    (id) =>
+      subgraph.dependencies[id].length === 0 &&
+      subgraph.continuousDependencies[id].length === 0
+  );
+
+  return subgraph;
+}
+
+// export function removeTaskFromTaskGraph(
+//   taskGraph: TaskGraph,
+//   reverseTaskDeps: TaskGraph['dependencies'],
+//   parentId: string
+// ): TaskGraph {
+//   // Go through deps
+//   for (const dep of taskGraph.dependencies[parentId]) {
+//     // If the other tasks depend on this task, continue
+//     if (reverseTaskDeps[dep].length === 0) {
+//       removeTasksFromReverseTaskDeps(reverseTaskDeps, dep);
+//       taskGraph = removeTaskFromTaskGraph(taskGraph, reverseTaskDeps, dep);
+//     }
+//   }
+//   for (const dep of taskGraph.continuousDependencies[parentId]) {
+//     if (reverseTaskDeps[dep].length === 0) {
+//       removeTasksFromReverseTaskDeps(reverseTaskDeps, dep);
+//       taskGraph = removeTaskFromTaskGraph(taskGraph, reverseTaskDeps, dep);
+//     }
+//   }
+//   taskGraph = removeTasksFromTaskGraph(taskGraph, [parentId]);
+//   removeTasksFromReverseTaskDeps(reverseTaskDeps, parentId);
+//
+//   return taskGraph;
+// }
+//
+// function removeTasksFromReverseTaskDeps(
+//   reverseTaskDeps: TaskGraph['dependencies'],
+//   taskId: string
+// ) {
+//   delete reverseTaskDeps[taskId];
+//   for (const id in reverseTaskDeps) {
+//     reverseTaskDeps[id] = reverseTaskDeps[id].filter((t) => t !== taskId);
+//   }
+//   return reverseTaskDeps;
+// }
 
 export function calculateReverseDeps(
   taskGraph: TaskGraph
