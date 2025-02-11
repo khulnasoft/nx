@@ -1,39 +1,23 @@
 {
-  "name": "@nx/webpack",
-  "version": "0.0.1",
   "private": false,
+  "name": "@nx/webpack",
   "description": "The Nx Plugin for Webpack contains executors and generators that support building applications using Webpack.",
   "repository": {
     "type": "git",
     "url": "https://github.com/nrwl/nx.git",
     "directory": "packages/webpack"
   },
-  "keywords": [
-    "Monorepo",
-    "Webpack",
-    "Web",
-    "CLI",
-    "Front-end"
-  ],
-  "main": "./index",
-  "typings": "./index.d.ts",
+  "homepage": "https://nx.dev",
+  "bugs": "https://github.com/nrwl/nx/issues",
+  "version": "0.0.1",
   "author": "Victor Savkin",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nrwl/nx/issues"
-  },
-  "homepage": "https://nx.dev",
-  "generators": "./generators.json",
-  "executors": "./executors.json",
-  "ng-update": {
-    "requirements": {},
-    "migrations": "./migrations.json"
-  },
+  "main": "./index",
   "dependencies": {
     "@babel/core": "^7.23.2",
     "@phenomnomnominal/tsquery": "~5.0.1",
     "ajv": "^8.12.0",
-    "autoprefixer": "^10.4.9",
+    "autoprefixer": "10.4.13",
     "babel-loader": "^9.1.2",
     "browserslist": "^4.21.4",
     "picocolors": "^1.1.0",
@@ -49,9 +33,9 @@
     "parse5": "4.0.0",
     "postcss": "^8.4.38",
     "postcss-import": "~14.1.0",
-    "postcss-loader": "^6.1.1",
+    "postcss-loader": "^8.1.1",
     "rxjs": "^7.8.0",
-    "sass": "^1.42.1",
+    "sass": "1.55.0",
     "sass-loader": "^12.2.0",
     "source-map-loader": "^5.0.0",
     "style-loader": "^3.3.0",
@@ -60,15 +44,29 @@
     "terser-webpack-plugin": "^5.3.3",
     "ts-loader": "^9.3.1",
     "tsconfig-paths-webpack-plugin": "4.0.0",
-    "tslib": "^2.3.0",
-    "webpack": "^5.80.0",
+    "tslib": "^2.3.1",
+    "webpack": "^5.88.0",
     "webpack-dev-server": "^5.0.4",
     "webpack-node-externals": "^3.0.0",
     "webpack-subresource-integrity": "^5.1.0",
     "@nx/devkit": "file:../devkit",
     "@nx/js": "file:../js"
   },
+  "executors": "./executors.json",
+  "generators": "./generators.json",
+  "keywords": [
+    "Monorepo",
+    "Webpack",
+    "Web",
+    "CLI",
+    "Front-end"
+  ],
+  "ng-update": {
+    "requirements": {},
+    "migrations": "./migrations.json"
+  },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "typings": "./index.d.ts"
 }

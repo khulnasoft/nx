@@ -1,35 +1,20 @@
 {
-  "name": "@nx/nuxt",
-  "version": "0.0.1",
   "private": false,
+  "name": "@nx/nuxt",
   "description": "The Nuxt plugin for Nx contains executors and generators for managing Nuxt applications and libraries within an Nx workspace. It provides:\n\n\n- Integration with libraries such as Vitest, Playwright, Cypress, and Storybook.\n\n- Generators for applications, libraries, and more.\n\n- Library build support for publishing packages to npm or other registries.\n\n- Utilities for automatic workspace refactoring.",
   "repository": {
     "type": "git",
     "url": "https://github.com/nrwl/nx.git",
     "directory": "packages/nuxt"
   },
-  "keywords": [
-    "Monorepo",
-    "Nuxt",
-    "Web",
-    "CLI",
-    "Front-end"
-  ],
-  "main": "./index",
-  "typings": "./index.d.ts",
+  "homepage": "https://nx.dev",
+  "bugs": "https://github.com/nrwl/nx/issues",
+  "version": "0.0.1",
   "author": "Victor Savkin",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nrwl/nx/issues"
-  },
-  "homepage": "https://nx.dev",
-  "generators": "./generators.json",
-  "executors": "./executors.json",
-  "nx-migrations": {
-    "migrations": "./migrations.json"
-  },
+  "main": "./index",
   "dependencies": {
-    "tslib": "^2.3.0",
+    "tslib": "^2.3.1",
     "@nuxt/kit": "^3.10.0",
     "@nx/devkit": "file:../devkit",
     "@nx/js": "file:../js",
@@ -38,10 +23,23 @@
     "@nx/vite": "file:../vite",
     "@phenomnomnominal/tsquery": "~5.0.1"
   },
+  "executors": "./executors.json",
+  "generators": "./generators.json",
+  "keywords": [
+    "Monorepo",
+    "Nuxt",
+    "Web",
+    "CLI",
+    "Front-end"
+  ],
+  "nx-migrations": {
+    "migrations": "./migrations.json"
+  },
   "peerDependencies": {
     "@nuxt/schema": "^3.10.0"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "typings": "./index.d.ts"
 }

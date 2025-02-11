@@ -1,13 +1,28 @@
 {
-  "name": "@nx/esbuild",
-  "version": "0.0.1",
   "private": false,
+  "name": "@nx/esbuild",
   "description": "The Nx Plugin for esbuild contains executors and generators that support building applications using esbuild",
   "repository": {
     "type": "git",
     "url": "https://github.com/nrwl/nx.git",
     "directory": "packages/esbuild"
   },
+  "homepage": "https://nx.dev",
+  "bugs": "https://github.com/nrwl/nx/issues",
+  "version": "0.0.1",
+  "author": "Victor Savkin",
+  "license": "MIT",
+  "main": "./index",
+  "dependencies": {
+    "@nx/devkit": "file:../devkit",
+    "@nx/js": "file:../js",
+    "tinyglobby": "^0.2.10",
+    "picocolors": "^1.1.0",
+    "tsconfig-paths": "^4.1.2",
+    "tslib": "^2.3.1"
+  },
+  "executors": "./executors.json",
+  "generators": "./generators.json",
   "keywords": [
     "Monorepo",
     "EsBuild",
@@ -16,27 +31,9 @@
     "Front-end",
     "Backend"
   ],
-  "main": "./index",
-  "typings": "./index.d.ts",
-  "author": "Victor Savkin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nrwl/nx/issues"
-  },
-  "homepage": "https://nx.dev",
-  "generators": "./generators.json",
-  "executors": "./executors.json",
   "ng-update": {
     "requirements": {},
     "migrations": "./migrations.json"
-  },
-  "dependencies": {
-    "@nx/devkit": "file:../devkit",
-    "@nx/js": "file:../js",
-    "tinyglobby": "^0.2.10",
-    "picocolors": "^1.1.0",
-    "tsconfig-paths": "^4.1.2",
-    "tslib": "^2.3.0"
   },
   "peerDependencies": {
     "esbuild": "~0.19.2"
@@ -48,5 +45,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "typings": "./index.d.ts"
 }

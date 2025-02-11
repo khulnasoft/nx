@@ -65,6 +65,13 @@ impl RustPseudoTerminal {
         );
 
         trace!("nx_fork command: {}", &command);
-        self.run_command(command, command_dir, js_env, exec_argv, Some(quiet), Some(true))
+        self.run_command(
+            command,
+            command_dir,
+            js_env,
+            exec_argv,
+            Some(quiet),
+            Some(true),
+        )
     }
 }

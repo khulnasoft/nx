@@ -1,28 +1,17 @@
 {
-  "name": "@nx/react-native",
-  "version": "0.0.1",
   "private": false,
+  "name": "@nx/react-native",
   "description": "The Nx Plugin for React Native contains generators for managing React Native applications and libraries within an Nx workspace. It provides: \n\n-Integration with libraries such as Jest, Detox, and Storybook.\n-Scaffolding for creating buildable libraries that can be published to npm.\n-Utilities for automatic workspace refactoring.",
-  "keywords": [
-    "Monorepo",
-    "React",
-    "Web",
-    "Jest",
-    "Native",
-    "CLI",
-    "Mobile"
-  ],
-  "homepage": "https://nx.dev",
-  "bugs": {
-    "url": "https://github.com/nrwl/nx/issues"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nrwl/nx.git",
     "directory": "packages/react-native"
   },
-  "license": "MIT",
+  "homepage": "https://nx.dev",
+  "bugs": "https://github.com/nrwl/nx/issues",
+  "version": "0.0.1",
   "author": "Victor Savkin",
+  "license": "MIT",
   "main": "./index",
   "types": "index.d.ts",
   "dependencies": {
@@ -34,7 +23,7 @@
     "metro-resolver": "~0.80.4",
     "picocolors": "^1.1.0",
     "tsconfig-paths": "^4.1.2",
-    "tslib": "^2.3.0",
+    "tslib": "^2.3.1",
     "@nx/devkit": "file:../devkit",
     "@nx/jest": "file:../jest",
     "@nx/js": "file:../js",
@@ -43,11 +32,20 @@
     "@nx/workspace": "file:../workspace"
   },
   "executors": "./executors.json",
+  "generators": "./generators.json",
+  "keywords": [
+    "Monorepo",
+    "React",
+    "Web",
+    "Jest",
+    "Native",
+    "CLI",
+    "Mobile"
+  ],
   "ng-update": {
     "requirements": {},
     "migrations": "./migrations.json"
   },
-  "generators": "./generators.json",
   "publishConfig": {
     "access": "public"
   }

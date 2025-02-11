@@ -1,13 +1,28 @@
 {
-  "name": "@nx/cypress",
-  "version": "0.0.1",
   "private": false,
+  "name": "@nx/cypress",
   "description": "The Nx Plugin for Cypress contains executors and generators allowing your workspace to use the powerful Cypress integration testing capabilities.",
   "repository": {
     "type": "git",
     "url": "https://github.com/nrwl/nx.git",
     "directory": "packages/cypress"
   },
+  "homepage": "https://nx.dev",
+  "bugs": "https://github.com/nrwl/nx/issues",
+  "version": "0.0.1",
+  "author": "Victor Savkin",
+  "license": "MIT",
+  "main": "./index",
+  "dependencies": {
+    "@nx/devkit": "file:../devkit",
+    "@nx/eslint": "file:../eslint",
+    "@nx/js": "file:../js",
+    "@phenomnomnominal/tsquery": "~5.0.1",
+    "detect-port": "^1.5.1",
+    "tslib": "^2.3.1"
+  },
+  "executors": "./executors.json",
+  "generators": "./generators.json",
   "keywords": [
     "Monorepo",
     "Angular",
@@ -21,27 +36,9 @@
     "Front-end",
     "Testing"
   ],
-  "main": "./index",
-  "typings": "./index.d.ts",
-  "author": "Victor Savkin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nrwl/nx/issues"
-  },
-  "homepage": "https://nx.dev",
-  "generators": "./generators.json",
-  "executors": "./executors.json",
   "ng-update": {
     "requirements": {},
     "migrations": "./migrations.json"
-  },
-  "dependencies": {
-    "@nx/devkit": "file:../devkit",
-    "@nx/eslint": "file:../eslint",
-    "@nx/js": "file:../js",
-    "@phenomnomnominal/tsquery": "~5.0.1",
-    "detect-port": "^1.5.1",
-    "tslib": "^2.3.0"
   },
   "peerDependencies": {
     "cypress": ">= 3 < 14"
@@ -53,5 +50,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "typings": "./index.d.ts"
 }

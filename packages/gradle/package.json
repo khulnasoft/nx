@@ -1,13 +1,28 @@
 {
-  "name": "@nx/gradle",
-  "version": "0.0.1",
   "private": false,
+  "name": "@nx/gradle",
   "description": "The Nx Plugin for Gradle allows Gradle tasks to be run through Nx",
   "repository": {
     "type": "git",
     "url": "https://github.com/nrwl/nx.git",
     "directory": "packages/gradle"
   },
+  "homepage": "https://nx.dev",
+  "bugs": "https://github.com/nrwl/nx/issues",
+  "version": "0.0.1",
+  "author": "Victor Savkin",
+  "license": "MIT",
+  "main": "./index",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./migrations.json": "./migrations.json",
+    "./generators.json": "./generators.json"
+  },
+  "dependencies": {
+    "@nx/devkit": "file:../devkit"
+  },
+  "generators": "./generators.json",
   "keywords": [
     "Monorepo",
     "Java",
@@ -15,28 +30,11 @@
     "CLI",
     "Backend"
   ],
-  "main": "./index",
-  "typings": "./index.d.ts",
-  "author": "Victor Savkin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nrwl/nx/issues"
-  },
-  "homepage": "https://nx.dev",
-  "generators": "./generators.json",
-  "exports": {
-    ".": "./index.js",
-    "./package.json": "./package.json",
-    "./migrations.json": "./migrations.json",
-    "./generators.json": "./generators.json"
-  },
   "nx-migrations": {
     "migrations": "./migrations.json"
   },
-  "dependencies": {
-    "@nx/devkit": "file:../devkit"
-  },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "typings": "./index.d.ts"
 }

@@ -1,30 +1,17 @@
 {
-  "name": "@nx/expo",
-  "version": "0.0.1",
   "private": false,
+  "name": "@nx/expo",
   "description": "The Expo Plugin for Nx contains executors and generators for managing and developing an expo application within your workspace. For example, you can directly build for different target platforms as well as generate projects and publish your code.",
-  "keywords": [
-    "Monorepo",
-    "Expo",
-    "React",
-    "Web",
-    "Jest",
-    "Native",
-    "CLI",
-    "Mobile",
-    "Testing"
-  ],
-  "homepage": "https://nx.dev",
-  "bugs": {
-    "url": "https://github.com/nrwl/nx/issues"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nrwl/nx.git",
     "directory": "packages/expo"
   },
-  "license": "MIT",
+  "homepage": "https://nx.dev",
+  "bugs": "https://github.com/nrwl/nx/issues",
+  "version": "0.0.1",
   "author": "Victor Savkin",
+  "license": "MIT",
   "main": "./index",
   "types": "index.d.ts",
   "dependencies": {
@@ -40,14 +27,25 @@
     "metro-resolver": "~0.80.4",
     "picocolors": "^1.1.0",
     "tsconfig-paths": "^4.1.2",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.1"
   },
   "executors": "./executors.json",
+  "generators": "./generators.json",
+  "keywords": [
+    "Monorepo",
+    "Expo",
+    "React",
+    "Web",
+    "Jest",
+    "Native",
+    "CLI",
+    "Mobile",
+    "Testing"
+  ],
   "ng-update": {
     "requirements": {},
     "migrations": "./migrations.json"
   },
-  "generators": "./generators.json",
   "publishConfig": {
     "access": "public"
   }

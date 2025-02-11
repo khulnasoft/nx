@@ -1,38 +1,27 @@
 {
   "name": "@nx/rspack",
   "description": "The Nx Plugin for Rspack contains executors and generators that support building applications using Rspack.",
-  "version": "0.0.1",
-  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "https://github.com/nrwl/nx.git",
     "directory": "packages/rspack"
   },
-  "bugs": {
-    "url": "https://github.com/nrwl/nx/issues"
-  },
-  "keywords": [
-    "Monorepo",
-    "Rspack",
-    "Bundling",
-    "Module Federation"
-  ],
+  "homepage": "https://nx.dev",
+  "bugs": "https://github.com/nrwl/nx/issues",
+  "version": "0.0.1",
   "author": "Jack Hsu",
   "license": "MIT",
-  "homepage": "https://nx.dev",
   "main": "src/index.js",
-  "generators": "./generators.json",
-  "executors": "./executors.json",
   "dependencies": {
     "@nx/js": "file:../js",
     "@nx/devkit": "file:../devkit",
     "@nx/web": "file:../web",
     "@nx/module-federation": "file:../module-federation",
     "@phenomnomnominal/tsquery": "~5.0.1",
-    "@rspack/core": "^1.1.5",
+    "@rspack/core": "1.1.6",
     "@rspack/dev-server": "^1.0.9",
     "@rspack/plugin-react-refresh": "^1.0.0",
-    "autoprefixer": "^10.4.9",
+    "autoprefixer": "10.4.13",
     "browserslist": "^4.21.4",
     "css-loader": "^6.4.0",
     "enquirer": "~2.3.6",
@@ -42,7 +31,7 @@
     "less-loader": "11.1.0",
     "license-webpack-plugin": "^4.0.2",
     "loader-utils": "^2.0.3",
-    "sass": "^1.42.1",
+    "sass": "1.55.0",
     "sass-loader": "^12.2.0",
     "source-map-loader": "^5.0.0",
     "style-loader": "^3.3.0",
@@ -50,18 +39,27 @@
     "postcss-import": "~14.1.0",
     "postcss-loader": "^8.1.1",
     "postcss": "^8.4.38",
-    "tslib": "^2.3.0",
-    "webpack": "^5.80.0",
+    "tslib": "^2.3.1",
+    "webpack": "^5.88.0",
     "webpack-node-externals": "^3.0.0"
+  },
+  "executors": "./executors.json",
+  "generators": "./generators.json",
+  "keywords": [
+    "Monorepo",
+    "Rspack",
+    "Bundling",
+    "Module Federation"
+  ],
+  "nx-migrations": {
+    "migrations": "./migrations.json"
   },
   "peerDependencies": {
     "@module-federation/enhanced": "^0.8.8",
     "@module-federation/node": "^2.6.21"
   },
-  "nx-migrations": {
-    "migrations": "./migrations.json"
-  },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "type": "commonjs"
 }

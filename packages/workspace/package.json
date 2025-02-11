@@ -1,13 +1,27 @@
 {
-  "name": "@nx/workspace",
-  "version": "0.0.1",
   "private": false,
+  "name": "@nx/workspace",
   "description": "The Workspace plugin contains executors and generators that are useful for any Nx workspace. It should be present in every Nx workspace and other plugins build on it.",
   "repository": {
     "type": "git",
     "url": "https://github.com/nrwl/nx.git",
     "directory": "packages/workspace"
   },
+  "homepage": "https://nx.dev",
+  "bugs": "https://github.com/nrwl/nx/issues",
+  "version": "0.0.1",
+  "author": "Victor Savkin",
+  "license": "MIT",
+  "main": "./index",
+  "dependencies": {
+    "@nx/devkit": "file:../devkit",
+    "chalk": "^4.1.0",
+    "enquirer": "~2.3.6",
+    "tslib": "^2.3.1",
+    "yargs-parser": "21.1.1"
+  },
+  "executors": "./executors.json",
+  "generators": "./generators.json",
   "keywords": [
     "Monorepo",
     "Angular",
@@ -19,16 +33,6 @@
     "Cypress",
     "CLI"
   ],
-  "main": "./index",
-  "typings": "./index.d.ts",
-  "author": "Victor Savkin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/nrwl/nx/issues"
-  },
-  "homepage": "https://nx.dev",
-  "generators": "./generators.json",
-  "executors": "./executors.json",
   "ng-update": {
     "requirements": {},
     "migrations": "./migrations.json",
@@ -37,14 +41,8 @@
       "nx": "*"
     }
   },
-  "dependencies": {
-    "@nx/devkit": "file:../devkit",
-    "chalk": "^4.1.0",
-    "enquirer": "~2.3.6",
-    "tslib": "^2.3.0",
-    "yargs-parser": "21.1.1"
-  },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "typings": "./index.d.ts"
 }
